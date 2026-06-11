@@ -1,256 +1,49 @@
-\# E-Commerce Funnel Analysis
+# E-Commerce Funnel Analysis
 
+I built this project to understand what actually drives customer satisfaction in e-commerce — not just track orders, but find where things go wrong and why.
 
+The dataset is from Olist, a Brazilian e-commerce platform with 100,000+ real orders. I loaded it into BigQuery, wrote SQL to extract KPIs, ran a proper statistical test, and built a dashboard in Looker Studio.
 
-End-to-end analytics project on the Olist Brazilian E-Commerce dataset using SQL, Python, Google BigQuery, and Looker Studio.
+## What I Found
 
+The biggest insight surprised me — logistics isn't the problem. 97% of orders get delivered. The real drop-off happens at satisfaction: 1 in 5 delivered customers gives a low rating.
 
+Digging deeper:
+- Fast deliveries (under 7 days) get an average rating of 4.41. Slow ones get 4.04. That gap is statistically significant (p ≈ 0, t = 42.74) — not noise.
+- Northeast Brazil (AL, MA, PI) has late delivery rates of 15–24%. Southeast states are at 5–8%. Same platform, very different experience.
+- Health & Beauty is the top revenue category at R$1.23M — nearly R$70K ahead of second place.
+- Less than 1% of customers come back for a second purchase. This is a one-time buyer marketplace, not a retention business.
+- Orders grew 8x between January 2017 and August 2018 — consistent growth with no major drops.
 
-\## Overview
+## What I Built
 
+- Loaded 7 CSV tables into BigQuery using Python
+- Wrote 8 SQL queries covering funnel analysis, delivery performance, revenue breakdown, and seller rankings
+- Built a cohort retention matrix in pandas to confirm the repeat-purchase hypothesis
+- Ran an independent samples t-test using scipy to validate the delivery speed finding
+- Connected everything to a 3-page Looker Studio dashboard
 
+## Dashboard
 
-This project analyzes 100,000+ e-commerce orders through a complete analytics pipeline, transforming raw transactional data into actionable business insights. The project covers data ingestion, KPI reporting, cohort retention analysis, statistical experimentation, and interactive dashboarding.
+Live: https://datastudio.google.com/reporting/ebc1f952-9f61-43af-9549-d74b170cdcc5
 
+## Tech
 
+Python, SQL, Google BigQuery, Looker Studio, pandas, scipy, plotly, pytest
 
-\## What This Project Does
+## How to Run
 
+1. Clone the repo
+2. Add credentials.json (GCP service account key) to root
+3. Download Olist dataset from Kaggle, place CSVs in data/
+4. pip install pandas google-cloud-bigquery scipy plotly pytest
+5. python src/load_to_bigquery.py
+6. python -m pytest tests/test_data_quality.py -v
+7. python src/cohort_analysis.py
+8. python src/ab_test.py
 
+## Author
 
-\- Loads and processes raw Olist CSV datasets into Google BigQuery
+Daggupati Sai Thrisha
 
-\- Performs SQL-based business KPI analysis
-
-\- Conducts customer cohort retention analysis
-
-\- Runs statistical A/B testing on delivery speed and customer satisfaction
-
-\- Builds interactive dashboards in Looker Studio
-
-\- Validates data quality through automated testing
-
-
-
-\## Key Insights
-
-
-
-\- Customer satisfaction is the largest funnel drop-off point, with 20.54% of delivered orders receiving low ratings.
-
-\- Fast deliveries (≤7 days) achieve significantly higher customer ratings than slower deliveries (4.41 vs 4.04, p < 0.001).
-
-\- Northeast Brazil regions (AL, MA, PI) experience late delivery rates between 15% and 24%, compared to 5–8% in Southeast regions.
-
-\- Health \& Beauty is the highest revenue-generating category, contributing R$1.23M in sales.
-
-\- Month-1 customer retention is below 1%, indicating predominantly one-time purchase behavior.
-
-\- Order volume grew approximately 8× between January 2017 and August 2018.
-
-
-
-\## Tech Stack
-
-
-
-\### Cloud
-
-\- Google BigQuery
-
-
-
-\### Languages
-
-\- Python
-
-\- SQL
-
-
-
-\### Libraries
-
-\- pandas
-
-\- scipy
-
-\- plotly
-
-\- google-cloud-bigquery
-
-
-
-\### Visualization
-
-\- Looker Studio
-
-
-
-\### Testing
-
-\- pytest
-
-
-
-\## Project Structure
-
-
-
-ecommerce-funnel-analysis/
-
-
-
-├── src/
-
-
-
-│   ├── load\_to\_bigquery.py
-
-
-
-│   ├── kpi\_queries.sql
-
-
-
-│   ├── cohort\_analysis.py
-
-
-
-│   └── ab\_test.py
-
-
-
-├── tests/
-
-
-
-│   └── test\_data\_quality.py
-
-
-
-├── dashboard/
-
-
-
-│   └── cohort\_retention.png
-
-
-
-└── README.md
-
-
-
-\## How to Run
-
-
-
-\### 1. Clone the Repository
-
-
-
-git clone <repository-url>
-
-
-
-cd ecommerce-funnel-analysis
-
-
-
-\### 2. Add GCP Credentials
-
-
-
-Place your Google Cloud service account key file as:
-
-
-
-credentials.json
-
-
-
-in the project root directory.
-
-
-
-\### 3. Download Dataset
-
-
-
-Download the Olist Brazilian E-Commerce dataset from Kaggle and place all CSV files inside:
-
-
-
-data/
-
-
-
-\### 4. Install Dependencies
-
-
-
-pip install pandas google-cloud-bigquery scipy plotly pytest
-
-
-
-\### 5. Load Data into BigQuery
-
-
-
-python src/load\_to\_bigquery.py
-
-
-
-\### 6. Run Data Quality Tests
-
-
-
-python -m pytest tests/test\_data\_quality.py -v
-
-
-
-\### 7. Run Cohort Analysis
-
-
-
-python src/cohort\_analysis.py
-
-
-
-\### 8. Run A/B Test
-
-
-
-python src/ab\_test.py
-
-
-
-\## Dashboard
-
-
-
-📊 Live Dashboard: https://datastudio.google.com/reporting/ebc1f952-9f61-43af-9549-d74b170cdcc5
-
-
-
-\## Results
-
-
-
-This project demonstrates an end-to-end modern analytics workflow using cloud data warehousing, SQL-based business intelligence, statistical experimentation, and dashboard development. It showcases skills in data engineering, analytics, experimentation, and business insight generation commonly used by data analysts, BI engineers, and data-driven product teams.
-
-
-
-\## Author
-
-
-
-Sai Thrisha
-
-
-
-GitHub: https://github.com/saithrishadaggupati/ecommerce-funnel-analysis
-
-
-
-LinkedIn: https://www.linkedin.com/in/saitrishadaggupati/
-
+GitHub: https://github.com/saithrishadaggupati
