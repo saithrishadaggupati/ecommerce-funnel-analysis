@@ -26,6 +26,8 @@ Digging deeper:
 ## Dashboard
 
 Live: https://datastudio.google.com/reporting/ebc1f952-9f61-43af-9549-d74b170cdcc5
+Live Frontend: https://ecommerce-frontend-q47m.vercel.app
+API (Cloud Run): https://ecommerce-api-721141274431.asia-south1.run.app
 
 ## Tech
 
