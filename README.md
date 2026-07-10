@@ -54,4 +54,5 @@ Python · SQL · Google BigQuery · React · FastAPI · Docker · GCP Cloud Run 
 ## Author
 
 Sai Thrisha Daggupati · NITK Surathkal · 
+
 GitHub: https://github.com/saithrishadaggupati
